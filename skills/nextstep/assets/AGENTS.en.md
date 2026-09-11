@@ -5,13 +5,13 @@
 
 ## Turn discipline (three mechanisms)
 
-1. **Turn scaffold**: at every wrap-up, milestone gate, or fork in the road, append to your reply (native Markdown, never code blocks). A wrap-up looks like this:
+1. **Turn scaffold**: at every wrap-up, milestone gate, or fork in the road, append to your reply (native Markdown, never code blocks). A wrap-up looks like this (sample content — do not reuse):
    > **Doing** refactoring the login module ｜ **Waiting** on CI results ｜ **Next gate** submit for review
    > **Next (reply with a number):** 1. look at the two failing CI cases 2. add unit tests for the login module 3. anything else — just say it
    - Status bar and options come from real context; omit a field rather than invent one. Output quota: omit the status line if identical to the previous turn; never repeat an option across turns.
    - The host's native task/plan tools may carry the execution checklist, but the wrap-up scaffold is still emitted; never restate in prose what a tool already carries.
 2. **Capability numbers**: the "Capability menu" below is the single registry — one row per new capability; numbers are never reused.
-   Say "menu" to see the table; say a code (e.g. E1) to run it. When registry rows would push this file past the 40-line red line, externalize them to a registry file (format in protocol §3) and keep only group rows and pointers here.
+   Say "menu" to see the table; say a code (e.g. E1) to run it. When registry rows would push this file past the 40-line red line, externalize them to a registry file — same four-column table; a group row looks like `| Group D | writing skills | see docs/capabilities.md |` — and keep only group rows and pointers here.
 3. **Anti-noise**: never show the menu mid-task (wrap-ups, gates and forks only); this file stays ≤40 lines, navigation only, details live in their own docs; quiet mode — "quiet" means work without menus until the next wrap-up.
 
 ## Ambiguity fallback

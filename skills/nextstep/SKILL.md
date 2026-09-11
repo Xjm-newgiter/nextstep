@@ -19,4 +19,10 @@ This skill is the one-shot setup helper and ships both installable templates in 
 4. Verify: tell the user to start a NEW session and say "menu" (or 菜单). The capability table coming back means the install worked.
 5. Offer to register their first real capability in the menu table — one row: number, trigger phrase, what it does, pointer to details.
 
+## Upgrade steps
+
+1. Read the protocol-version line in the installed template's header; compare it with the version in `assets/`.
+2. Overwrite the installed template's "Turn discipline" section and "Hard rules" section with the latest `assets/` versions — never touch the user's registered capability rows in the menu table.
+3. Update the version line, then ask the user to re-verify in a NEW session with "menu" (or 菜单).
+
 Full spec: `会话推进协议.md` at the root of the NextStep repository (not bundled in the installed skill — see the project README for the link).

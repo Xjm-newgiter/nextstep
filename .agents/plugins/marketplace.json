@@ -1,0 +1,21 @@
+{
+  "name": "nextstep",
+  "interface": {
+    "displayName": "NextStep"
+  },
+  "plugins": [
+    {
+      "name": "nextstep",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Xjm-newgiter/nextstep.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -62,7 +62,7 @@ It's neither. A skill is a manual loaded on demand; a subagent is a worker with 
 The protocol polices itself: menus only at wrap-ups and gates, the file itself stays ≤40 lines, and "quiet" switches to silent mode.
 
 **Where do I register capabilities?**
-In the "Capability menu" table inside your `AGENTS.md`. One row each: number, trigger phrase, what it does, pointer to details. Past 8 rows, externalize the registry to a file and keep group rows and pointers in `AGENTS.md`.
+In the "Capability menu" table inside your `AGENTS.md`. One row each: number, trigger phrase, what it does, pointer to details. When registry rows would push the file past the 40-line red line, externalize the registry to a file and keep only group rows and pointers in `AGENTS.md`.
 
 **Is the spec available in English?**
 Not yet — the full spec (会话推进协议.md) is Chinese-only for now. Both AGENTS.md templates are fully self-contained in their language, so this only affects reference reading. Tracked in [docs/open-questions.md](docs/open-questions.md).
