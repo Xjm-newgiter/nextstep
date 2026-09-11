@@ -10,3 +10,4 @@
 - ZCode 插件清单（plugin.json + marketplace.json，可自建 marketplace 安装）；skills CLI 安装通道
 - 已知限制：协议完整正文暂仅中文（英文模板自包含，不受影响）；开关对照实验未跑，方法见 docs/evidence.md
 - 发布当日补充：26 个历史会话转写的观察性数据（脱敏，docs/evidence.md）——无协议基线 19 会话零脚手架，协议在场 3 会话多次出现，作者自用会话内对照 0%→9/9
+- 复审定稿：收口正例与自我合理化识别进模板；登记外置改自指边界（撤回"8 行"魔法数，复审证伪后修正）；SKILL.md 描述补排除清单、删"manage"超售；最小结构校验 CI（scripts/check.py：JSON/行数红线/链接/清单同步）；evidence 补样本流转表、就地强度标注、行为级指标与 A/B 判定预注册

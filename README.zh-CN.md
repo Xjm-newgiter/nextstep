@@ -42,7 +42,7 @@
 - 单仓库生效：把 [`skills/nextstep/assets/AGENTS.md`](skills/nextstep/assets/AGENTS.md)（中文会话）或 [`skills/nextstep/assets/AGENTS.en.md`](skills/nextstep/assets/AGENTS.en.md)（英文会话）复制到仓库根 `AGENTS.md`；
 - 个人全局生效：同内容复制到用户级指令文件，如 `~/.zcode/AGENTS.md`（ZCode）、`~/.claude/CLAUDE.md`（Claude Code）。
 
-目标位置已有 AGENTS.md 时追加合并，不要覆盖。
+目标位置已有 AGENTS.md 时追加合并，不要覆盖。模板头部标注协议版本——升级已装模板＝用最新 `skills/nextstep/assets/` 模板覆盖对应区段（合并原则不变）。
 
 也可以装成技能，让技能代劳安装：
 

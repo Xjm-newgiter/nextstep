@@ -37,7 +37,7 @@ Anything outside the menu is always allowed: just say what you want.
 
 **Global / personal** — same content into your user-level instructions file: `~/.zcode/AGENTS.md` (ZCode) or `~/.claude/CLAUDE.md` (Claude Code).
 
-If the target file already exists, merge sections instead of overwriting.
+If the target file already exists, merge sections instead of overwriting. The template header states its protocol version — to upgrade an installed template, overwrite the corresponding sections with the latest `skills/nextstep/assets/` files (merge rules unchanged).
 
 **As a skill** (one-shot setup helper, shipped self-contained with both templates):
 
