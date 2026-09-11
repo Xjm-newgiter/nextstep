@@ -1,7 +1,7 @@
 # NextStep Protocol · AGENTS.md template (English)
 
 > Usage: copy this file to your repository root as `AGENTS.md` = active for this repo; copy to `~/.zcode/AGENTS.md` = active globally for your user.
-> Protocol version: v2.1 (product 1.x). To upgrade an installed template, overwrite the corresponding sections with the latest assets; merge, never wholesale-overwrite. Chinese template: [AGENTS.md](AGENTS.md).
+> Protocol version: 1.0. To upgrade an installed template, overwrite the corresponding sections with the latest assets; merge, never wholesale-overwrite. Chinese template: [AGENTS.md](AGENTS.md).
 
 ## Turn discipline (three mechanisms)
 
@@ -27,7 +27,7 @@ Anything outside the menu is always legal: the user states the task plainly and 
 
 ## Hard rules
 
-- **Persistence**: these rules apply to every remaining turn of this session until the user explicitly stops them; topic changes don't expire them. If unsure whether they still apply, they do.
+- **Persistence**: these rules apply to every remaining turn of this session until the user explicitly stops them — the stop phrase is "stop the protocol", which silences the scaffold until the user asks to resume; topic changes don't expire them. If unsure whether they still apply, they do.
 - Status bar and options come from real context only; omit rather than invent.
 - This does NOT count as a wrap-up: reporting completion without the status bar; options for things absent from the context; a menu dropped mid-task; menus wrapped in code blocks.
   "This round is more or less a wrap-up", "the user was just asking casually", "the status line is too long, skip it" — that is self-justification, not an exemption.

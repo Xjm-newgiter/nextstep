@@ -1,11 +1,11 @@
 # NextStep
 
 > Options handed to you. Reply with a number to move forward.
-> A resident `AGENTS.md` protocol that gives every AI coding session a "what's next", and turns your team's scripts and workflows into numbered, zero-memory commands.
+> House rules for AI coding assistants — installed once in `AGENTS.md`, active in every session.
 
 English · [简体中文](README.zh-CN.md)
 
-Works with any AI coding assistant that reads `AGENTS.md`: ZCode, Claude Code, Codex, Cursor, and more.
+Works with any AI coding assistant that reads `AGENTS.md`: ZCode, Claude Code, Codex, Cursor, and more. The whole product is text: no network, no telemetry, no dependencies.
 
 ## The problem
 
@@ -46,7 +46,7 @@ Reply with a number and it runs. Want something else? Just say it — always all
 
 **Per repo** — copy [`skills/nextstep/assets/AGENTS.md`](skills/nextstep/assets/AGENTS.md) (Chinese sessions) or [`skills/nextstep/assets/AGENTS.en.md`](skills/nextstep/assets/AGENTS.en.md) (English sessions) to your repository root as `AGENTS.md`.
 
-**Global / personal** — same content into your user-level instructions file: `~/.zcode/AGENTS.md` (ZCode) or `~/.claude/CLAUDE.md` (Claude Code).
+**Global / personal** — same content into your user-level instructions file: `~/.zcode/AGENTS.md` (ZCode) or `~/.claude/CLAUDE.md` (Claude Code). Note this affects every session in every workspace.
 
 If the target file already exists, merge sections instead of overwriting. The template header states its protocol version — to upgrade an installed template, overwrite the corresponding sections with the latest `skills/nextstep/assets/` files (merge rules unchanged).
 
@@ -62,7 +62,7 @@ npx skills add Xjm-newgiter/nextstep@nextstep --global
 
 ## Verify
 
-Start a new session and say "menu". If the assistant answers with the capability table, it's live.
+Start a new session and say "menu". If the assistant answers with the capability table, it's live. Then replace the E1 sample row with your first real capability right away — numbers are never reused, so don't leave E1 pointing at the placeholder.
 
 ## FAQ
 
@@ -80,6 +80,12 @@ In the "Capability menu" table inside your `AGENTS.md`. One row each: number, tr
 
 **When does the installer skill NOT run?**
 By design, only install/upgrade requests wake it. It stays dormant when: the protocol is already installed (daily "menu" and number replies run via AGENTS.md, not the skill); the session started before installation; a same-named skill shadows it at a higher-precedence path (`~/.zcode/skills` > `~/.agents/skills` > project > plugin); it's disabled in client settings; the request doesn't match the description (fixing bugs, writing code); or the frontmatter fails to parse. The skill not running never means the protocol stopped working.
+
+**How do I turn it off or uninstall it?**
+In session, say "stop the protocol" (停止协议) — the scaffold stops immediately and stays off until you ask to resume. To remove it permanently, delete the three NextStep blocks ("Turn discipline", "Capability menu", "Hard rules") from your `AGENTS.md`; to remove the installer skill, uninstall it in your client's skill settings or delete its folder. Removal is trivial by design — the product is text only.
+
+**Said "menu" and nothing happened?**
+In order: did you start a NEW session after installing; does your `AGENTS.md` actually contain the "Turn discipline" section; does your host read the `AGENTS.md` at the path you edited; if you merged into an existing file, is the capability-menu table intact. If your template header has no protocol-version line, the install is an early build — refresh it from the latest template.
 
 **Is the spec available in English?**
 Not yet — the full spec (会话推进协议.md) is Chinese-only for now. Both AGENTS.md templates are fully self-contained in their language, so this only affects reference reading. Tracked in [docs/open-questions.md](docs/open-questions.md).

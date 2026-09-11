@@ -1,11 +1,11 @@
 # NextStep · 会话推进协议
 
 > 选项递到眼前，回一个数字就能推进。
-> 给 AI 编码助手装一套"零记忆"的推进方式：每轮收口自动给出下一步，沉淀的能力说编号就能调。
+> 给 AI 编码助手装一份"家规"：写进 `AGENTS.md` 一次，每次会话自动生效。
 
 [English](README.md) · 简体中文
 
-适用于 ZCode / Claude Code / Codex / Cursor 等任何自动读取 `AGENTS.md` 的 AI 编码助手。
+适用于 ZCode / Claude Code / Codex / Cursor 等任何自动读取 `AGENTS.md` 的 AI 编码助手。整个产品就是文本：无网络、无遥测、无依赖。
 
 ## 解决什么问题
 
@@ -44,7 +44,7 @@
 
 **单仓库生效**：把 [`skills/nextstep/assets/AGENTS.md`](skills/nextstep/assets/AGENTS.md)（中文会话）或 [`skills/nextstep/assets/AGENTS.en.md`](skills/nextstep/assets/AGENTS.en.md)（英文会话）复制到仓库根 `AGENTS.md`。
 
-**个人全局生效**：同内容复制到用户级指令文件，如 `~/.zcode/AGENTS.md`（ZCode）、`~/.claude/CLAUDE.md`（Claude Code）。
+**个人全局生效**：同内容复制到用户级指令文件，如 `~/.zcode/AGENTS.md`（ZCode）、`~/.claude/CLAUDE.md`（Claude Code）。注意这会影响所有工作区的所有会话。
 
 目标位置已有 AGENTS.md 时追加合并，不要覆盖。模板头部标注协议版本——升级已装模板＝用最新 `skills/nextstep/assets/` 模板覆盖对应区段（合并原则不变）。
 
@@ -60,7 +60,7 @@ npx skills add Xjm-newgiter/nextstep@nextstep --global
 
 ## 验证
 
-新开会话说「菜单」，AI 回出能力表 = 安装成功。
+新开会话说「菜单」，AI 回出能力表 = 安装成功。随后立刻把 E1 示例行改成你的第一个真实能力——编号一经分配不复用，别让 E1 一直指着占位符。
 
 ## 常见问题
 
@@ -78,6 +78,12 @@ npx skills add Xjm-newgiter/nextstep@nextstep --global
 
 **哪些情况安装技能不会运行？**
 按设计，只有安装/升级协议的请求会唤醒它。以下情况不运行：协议已装好（日常「菜单」、回数字走 AGENTS.md，不经技能）；会话早于安装启动；同名技能在更高优先级路径遮蔽（`~/.zcode/skills` > `~/.agents/skills` > 项目级 > 插件）；客户端设置里被禁用；请求内容与描述不匹配（如修 bug、写代码）；frontmatter 解析错误。技能不运行 ≠ 协议不生效。
+
+**怎么关掉或卸载它？**
+会话里说「停止协议」——脚手架立即停发，直到你要求恢复。要永久移除：把 `AGENTS.md` 里 NextStep 的三块（推进纪律、能力菜单、硬规则）删掉即可；安装技能则在客户端技能设置里卸载或直接删它的目录。移除成本天生极低——产品就是纯文本。
+
+**说了「菜单」没反应？**
+按顺序查：装完后重开会话了吗；你的 `AGENTS.md` 里真的有"推进纪律"这一节吗；你的宿主读取的是你改的那个路径的 `AGENTS.md` 吗；如果是合并进已有文件，能力菜单表还完整吗。若模板头部没有协议版本行，说明是早期版本的安装——用最新模板刷新一次。
 
 **协议正文有英文版吗？**
 暂无——完整正文（会话推进协议.md）目前只有中文。两份 AGENTS.md 模板各自语言自包含，只影响参考阅读。跟踪于 [docs/open-questions.md](docs/open-questions.md)。
