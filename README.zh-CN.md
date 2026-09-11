@@ -69,6 +69,9 @@ ZCode 插件方式：Create → Add marketplace → 填 `https://github.com/Xjm-
 **能力登记在哪里？**
 就登记在 AGENTS.md 的「能力菜单」表里，一行一个：编号、你说什么、我做什么、详情指针。超过 8 行时外置成登记文件，AGENTS.md 里只留分组行和指针。
 
+**哪些情况安装技能不会运行？**
+按设计，只有安装/管理协议的请求会唤醒它。以下情况不运行：协议已装好（日常「菜单」、回数字走 AGENTS.md，不经技能）；会话早于安装启动；同名技能在更高优先级路径遮蔽（`~/.zcode/skills` > `~/.agents/skills` > 项目级 > 插件）；客户端设置里被禁用；请求内容与描述不匹配（如修 bug、写代码）；frontmatter 解析错误。技能不运行 ≠ 协议不生效。
+
 ## License
 
 [MIT](LICENSE)

@@ -67,6 +67,9 @@ In the "Capability menu" table inside your `AGENTS.md`. One row each: number, tr
 **Is the spec available in English?**
 Not yet — the full spec (会话推进协议.md) is Chinese-only for now. Both AGENTS.md templates are fully self-contained in their language, so this only affects reference reading. Tracked in [docs/open-questions.md](docs/open-questions.md).
 
+**When does the installer skill NOT run?**
+By design, only install/manage requests wake it. It stays dormant when: the protocol is already installed (daily "menu" and number replies run via AGENTS.md, not the skill); the session started before installation; a same-named skill shadows it at a higher-precedence path (`~/.zcode/skills` > `~/.agents/skills` > project > plugin); it's disabled in client settings; the request doesn't match the description (fixing bugs, writing code); or the frontmatter fails to parse. The skill not running never means the protocol stopped working.
+
 ## License
 
 [MIT](LICENSE)
