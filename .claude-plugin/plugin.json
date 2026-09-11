@@ -1,8 +1,0 @@
-{
-  "name": "nextstep",
-  "version": "1.0.0",
-  "description": "NextStep conversation protocol for Claude Code: a resident AGENTS.md protocol with wrap-up status bar, numbered next steps, and a numbered capability menu.",
-  "author": {
-    "name": "Xjm-newgiter"
-  }
-}

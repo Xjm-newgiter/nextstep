@@ -1,94 +1,96 @@
 # NextStep
 
-> Options handed to you. Reply with a number to move forward.
-> House rules for AI coding assistants — installed once in `AGENTS.md`, active in every session.
+> Reply with a number and it moves.
+> House rules for AI coding assistants. Paste them into `AGENTS.md` once, and every session follows them.
 
 English · [简体中文](README.zh-CN.md)
 
-Works with any AI coding assistant that reads `AGENTS.md`: ZCode, Claude Code, Codex, Cursor, and more. The whole product is text: no network, no telemetry, no dependencies.
+Works with anything that reads `AGENTS.md`: ZCode, Claude Code, Codex, Cursor. It is text only, so there is nothing to install, nothing to phone home, and no dependencies to manage.
 
 ## The problem
 
-- Your agent finishes a task and stops. *What's next?* is always your job.
-- The scripts, workflows and conventions your team built have trigger words nobody remembers.
-- Stuffing prompt lists to fix the two problems above backfires: the longer the list, the worse the model performs.
+An agent finishes a task and stops. Working out what comes next is your job again.
+
+Your team's scripts and workflows have trigger words nobody remembers.
+
+The usual fix is to pile more instructions into the prompt file. That makes the model follow them worse, not better.
 
 ## What it does
 
-Three mechanisms, ≤40 lines of `AGENTS.md`, no dependencies:
+Three mechanisms, under 40 lines of `AGENTS.md`.
 
-1. **Turn scaffold** — at every wrap-up the assistant appends a one-line status bar (Doing / Waiting / Next gate) and up to 5 numbered next steps drawn from real context. Reply with a number; it runs; wrap up; repeat.
-2. **Capability numbers** — a registry table maps numbers to capabilities. Say "menu" to see all of them, say a code like `E1` to run one. A new capability costs one new row.
-3. **Anti-noise** — no menus mid-task; say "quiet" and it works silently until the next wrap-up.
+When a round of work ends, the assistant adds a status line and up to five numbered next steps taken from the actual conversation. You reply with a number, it does the thing, then it wraps up again.
 
-Anything outside the menu is always allowed: just say what you want.
+A capability table maps numbers to capabilities. Say "menu" to see it, or say `E1` to run one. Adding a capability costs one row.
+
+While work is in progress there are no menus at all. Say "quiet" and it stays quiet until the round ends. You can always ignore the table and just say what you want.
 
 ## What changes
 
 | Before | After |
 |--------|-------|
-| Agent finishes, goes silent, you type "what now?" | Every wrap-up ends with a status bar and numbered next steps. |
-| "What was that deploy script called again?" | You type `D2`. The registry remembers so you don't have to. |
-| A 200-line prompt file the model only half-reads. | ≤40 lines, navigation only; details live where they're used. |
+| Agent finishes, goes silent, you type "what now?" | Every round ends with a status line and numbered next steps. |
+| "What was that deploy script called again?" | You type `D2`. The table remembers for you. |
+| A 200-line prompt file the model half-reads. | Under 40 lines of navigation, with detail kept where it gets used. |
 
-## What a wrap-up looks like
+## What a round ending looks like
 
 > **Doing** refactoring the login module ｜ **Waiting** on CI results ｜ **Next gate** submit for review
 >
 > **Next (reply with a number):**
 > 1. look at the two failing CI cases
 > 2. add unit tests for the login module
-> 3. anything else — just say it
+> 3. anything else, just say it
 
-Reply with a number and it runs. Want something else? Just say it — always allowed.
+Reply with a number and it runs. Want something else? Say so.
 
 ## Install
 
-**Per repo** — copy [`skills/nextstep/assets/AGENTS.md`](skills/nextstep/assets/AGENTS.md) (Chinese sessions) or [`skills/nextstep/assets/AGENTS.en.md`](skills/nextstep/assets/AGENTS.en.md) (English sessions) to your repository root as `AGENTS.md`.
+Per repo: copy [`templates/AGENTS.md`](templates/AGENTS.md) for Chinese sessions, or [`templates/AGENTS.en.md`](templates/AGENTS.en.md) for English ones, to your repository root as `AGENTS.md`.
 
-**Global / personal** — same content into your user-level instructions file: `~/.zcode/AGENTS.md` (ZCode) or `~/.claude/CLAUDE.md` (Claude Code). Note this affects every session in every workspace.
+For your own machine instead: put the same content in your user-level instructions file, either `~/.zcode/AGENTS.md` (ZCode) or `~/.claude/CLAUDE.md` (Claude Code). Be aware this applies to every session in every workspace.
 
-If the target file already exists, merge sections instead of overwriting. The template header states its protocol version — to upgrade an installed template, overwrite the corresponding sections with the latest `skills/nextstep/assets/` files (merge rules unchanged).
+If the target file already exists, merge the sections rather than replacing the whole file. The template header carries a protocol version. To upgrade an installed template, overwrite the corresponding sections with the latest copy from `templates/`.
 
-**As a skill** (one-shot setup/upgrade helper, shipped self-contained with both templates):
+You can also let a skill do the setup:
 
 ```bash
-npx skills add Xjm-newgiter/nextstep@nextstep --global
+npx skills add Xjm-newgiter/nextstep --global
 ```
 
-**As a plugin** — in ZCode: Create → Add marketplace → `https://github.com/Xjm-newgiter/nextstep`, then install `nextstep`. In Claude Code: `/plugin marketplace add Xjm-newgiter/nextstep` then `/plugin install nextstep@nextstep`.
-
-> Gitee mirror: gitee.com/xujingmeng/nextstep. The skills CLI shorthand above targets GitHub; Gitee users should clone and copy the template manually.
+> A Gitee mirror lives at gitee.com/xujingmeng/nextstep. The command above targets GitHub, so Gitee users should clone and copy the template by hand.
 
 ## Verify
 
-Start a new session and say "menu". If the assistant answers with the capability table, it's live. Then replace the E1 sample row with your first real capability right away — numbers are never reused, so don't leave E1 pointing at the placeholder.
+Start a new session and say "menu". If the assistant answers with the capability table, it is live.
+
+Then replace the E1 sample row with your first real capability. Numbers are never reused, so leaving E1 pointing at the placeholder burns that number for good.
 
 ## FAQ
 
 **How is this different from a skill or a subagent?**
-It's neither. A skill is a manual loaded on demand; a subagent is a worker with its own context window. NextStep is standing house rules, read automatically in every session. The three compose fine.
+It is neither. A skill is a manual the agent loads on demand. A subagent is a worker with its own context window. NextStep is standing house rules, read automatically in every session. The three compose fine.
 
-**How is this different from built-in task tools (TodoWrite, plan mode, slash commands)?**
-Those carry execution state within a turn, when the model happens to use them. NextStep adds a wrap-up *contract*: the status bar and numbered next steps ship at every wrap-up, in every host, plus a persistent capability registry and quiet-mode discipline. It composes with native tools — they may carry the execution checklist while the scaffold still ships (adjudicated in [docs/open-questions.md](docs/open-questions.md) #7).
+**How is this different from built-in task tools like TodoWrite or plan mode?**
+Those carry execution state inside a turn, and only when the model reaches for them. NextStep adds a standing contract: the status line and numbered steps arrive at every round ending, in any host that reads `AGENTS.md`. It also brings the capability table and quiet mode. The two coexist, so native tools can hold the checklist while the status line still ships.
 
-**Won't the menus make everything noisier?**
-The protocol polices itself: menus only at wrap-ups and gates, the file itself stays ≤40 lines, and "quiet" switches to silent mode.
+**Won't the menus get noisy?**
+They are held to a budget. Menus appear only at round endings and gates, the file itself stays under 40 lines, and "quiet" switches them off until the next round ends.
 
-**Where do I register capabilities?**
-In the "Capability menu" table inside your `AGENTS.md`. One row each: number, trigger phrase, what it does, pointer to details. When registry rows would push the file past the 40-line red line, externalize the registry to a file and keep only group rows and pointers in `AGENTS.md`.
+**Where do capabilities get registered?**
+In the capability table inside your `AGENTS.md`. One row each: number, trigger phrase, what it does, where the detail lives. When the table would push the file past 40 lines, move it to its own file and leave only group rows and pointers behind.
 
-**When does the installer skill NOT run?**
-By design, only install/upgrade requests wake it. It stays dormant when: the protocol is already installed (daily "menu" and number replies run via AGENTS.md, not the skill); the session started before installation; a same-named skill shadows it at a higher-precedence path (`~/.zcode/skills` > `~/.agents/skills` > project > plugin); it's disabled in client settings; the request doesn't match the description (fixing bugs, writing code); or the frontmatter fails to parse. The skill not running never means the protocol stopped working.
+**What makes the skill go dormant?**
+By design, only install and upgrade requests wake it. It stays dormant when the protocol is already installed (day to day, "menu" and number replies go through `AGENTS.md`, not the skill), when the session started before installation, when a same-named skill shadows it at a higher-precedence path, when it is disabled in client settings, when a request does not match its description such as fixing bugs or writing code, or when its frontmatter fails to parse. The skill not running never means the protocol stopped working.
 
-**How do I turn it off or uninstall it?**
-In session, say "stop the protocol" (停止协议) — the scaffold stops immediately and stays off until you ask to resume. To remove it permanently, delete the three NextStep blocks ("Turn discipline", "Capability menu", "Hard rules") from your `AGENTS.md`; to remove the installer skill, uninstall it in your client's skill settings or delete its folder. Removal is trivial by design — the product is text only.
+**How do I turn it off or remove it?**
+Say "stop the protocol" and the status line stops immediately, staying off until you ask to resume. To remove it for good, delete the three NextStep sections from your `AGENTS.md`: turn discipline, capability menu, hard rules. To remove the installer skill, uninstall it in your client's skill settings or delete its folder. Removal is easy on purpose, since the whole thing is text.
 
-**Said "menu" and nothing happened?**
-In order: did you start a NEW session after installing; does your `AGENTS.md` actually contain the "Turn discipline" section; does your host read the `AGENTS.md` at the path you edited; if you merged into an existing file, is the capability-menu table intact. If your template header has no protocol-version line, the install is an early build — refresh it from the latest template.
+**I said "menu" and nothing happened.**
+Work through these in order. Did you start a new session after installing? Does your `AGENTS.md` actually contain the turn discipline section? Does your host read the `AGENTS.md` at the path you edited? If you merged into an existing file, is the capability table still intact? And if your template header has no protocol version line, the install is an early build, so refresh it from the latest template.
 
 **Is the spec available in English?**
-Not yet — the full spec (会话推进协议.md) is Chinese-only for now. Both AGENTS.md templates are fully self-contained in their language, so this only affects reference reading. Tracked in [docs/open-questions.md](docs/open-questions.md).
+Not yet. The full spec (`会话推进协议.md`) is Chinese only. Both templates are self-contained in their own language, so this only affects reference reading.
 
 ## License
 
