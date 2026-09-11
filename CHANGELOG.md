@@ -9,3 +9,4 @@
 - 中英双语 AGENTS.md 模板（自包含于 skills/nextstep/assets/）与双语 README
 - ZCode 插件清单（plugin.json + marketplace.json，可自建 marketplace 安装）；skills CLI 安装通道
 - 已知限制：协议完整正文暂仅中文（英文模板自包含，不受影响）；开关对照实验未跑，方法见 docs/evidence.md
+- 发布当日补充：26 个历史会话转写的观察性数据（脱敏，docs/evidence.md）——无协议基线 19 会话零脚手架，协议在场 3 会话多次出现，作者自用会话内对照 0%→9/9
