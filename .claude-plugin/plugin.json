@@ -1,0 +1,12 @@
+{
+  "name": "nextstep",
+  "description": "NextStep conversation protocol: turn scaffolding with numbered next steps and a numbered capability menu, resident in AGENTS.md (会话推进协议).",
+  "version": "1.0.0",
+  "author": {
+    "name": "Xjm-newgiter"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Xjm-newgiter/nextstep",
+  "repository": "https://github.com/Xjm-newgiter/nextstep",
+  "skills": "skills"
+}

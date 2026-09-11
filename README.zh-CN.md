@@ -50,7 +50,7 @@
 npx skills add Xjm-newgiter/nextstep@nextstep --global
 ```
 
-ZCode 插件方式：Create → Add marketplace → 填 `https://github.com/Xjm-newgiter/nextstep`，然后安装 `nextstep`。
+ZCode 插件方式：Create → Add marketplace → 填 `https://github.com/Xjm-newgiter/nextstep`，然后安装 `nextstep`。Claude Code：`/plugin marketplace add Xjm-newgiter/nextstep` 后 `/plugin install nextstep@nextstep`。
 
 > Gitee 镜像：gitee.com/xujingmeng/nextstep。上面 skills 命令的简写形式指向 GitHub，Gitee 用户请克隆后手动复制模板。
 

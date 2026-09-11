@@ -45,7 +45,7 @@ If the target file already exists, merge sections instead of overwriting.
 npx skills add Xjm-newgiter/nextstep@nextstep --global
 ```
 
-**As a ZCode plugin** — in ZCode: Create → Add marketplace → `https://github.com/Xjm-newgiter/nextstep`, then install `nextstep`.
+**As a ZCode plugin** — in ZCode: Create → Add marketplace → `https://github.com/Xjm-newgiter/nextstep`, then install `nextstep`. Claude Code: `/plugin marketplace add Xjm-newgiter/nextstep` then `/plugin install nextstep@nextstep`.
 
 > Gitee mirror: gitee.com/xujingmeng/nextstep. The skills CLI shorthand above targets GitHub; Gitee users should clone and copy the template manually.
 
