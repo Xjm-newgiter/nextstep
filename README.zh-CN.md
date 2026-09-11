@@ -15,42 +15,46 @@
 
 ## 三个机制
 
-| 机制 | 一句话 | 细节 |
-|------|--------|------|
-| 回合脚手架 | 每次收口附状态栏 1 行 + 「下一步」编号选项 ≤5，回数字即执行，循环推进 | 《会话推进协议.md》§三 |
-| 能力编号 | 能力登记成表；说「菜单」看全表，说编号（如 B1）直接调用 | 同上 |
-| 防噪三纪律 | 执行中途不出菜单、文件保持 ≤40 行只做导航、说「安静」即静默 | 同上 |
+1. **回合脚手架**——每次收口，助手在回复末尾附一行状态栏（在办 / 在途 / 下一闸口）和至多 5 个来自真实上下文的编号下一步。回数字即执行，做完再收口，循环推进。
+2. **能力编号**——登记表把编号映射到能力。说「菜单」看全表，说编号（如 `E1`）直接调用。新能力只花一行。
+3. **防噪**——执行中途不出菜单；说「安静」就静默干活直到下次收口。
 
 菜单外的事永远合法：直接说正事，AI 直接干。
 
-## 长什么样
+## 改了什么
 
-一轮工作收口时，AI 回复的末尾会长这样：
+| 之前 | 之后 |
+|------|------|
+| AI 干完就沉默，你追问"接下来呢？" | 每次收口都带状态栏和编号下一步。 |
+| "那个部署脚本叫什么来着？" | 你打 `D2`。登记表替你记住。 |
+| 200 行提示词文件，模型只读进去一半 | ≤40 行，只做导航；细节放在用得到的地方。 |
+
+## 收口长什么样
 
 > **在办** 重构登录模块 ｜ **在途** 等 CI 结果 ｜ **下一闸口** 提交评审
 >
 > **下一步（回数字即可）：**
->
 > 1. 先看 CI 挂掉的两条用例
 > 2. 补登录模块的单元测试
-> 3. 其他 —— 直接说事，不受限
+> 3. 其他——直接说事
 
 回个数字它就接着干；想干别的直接说，永远不受限。
 
-## 安装（多选一）
+## 安装
 
-- 单仓库生效：把 [`skills/nextstep/assets/AGENTS.md`](skills/nextstep/assets/AGENTS.md)（中文会话）或 [`skills/nextstep/assets/AGENTS.en.md`](skills/nextstep/assets/AGENTS.en.md)（英文会话）复制到仓库根 `AGENTS.md`；
-- 个人全局生效：同内容复制到用户级指令文件，如 `~/.zcode/AGENTS.md`（ZCode）、`~/.claude/CLAUDE.md`（Claude Code）。
+**单仓库生效**：把 [`skills/nextstep/assets/AGENTS.md`](skills/nextstep/assets/AGENTS.md)（中文会话）或 [`skills/nextstep/assets/AGENTS.en.md`](skills/nextstep/assets/AGENTS.en.md)（英文会话）复制到仓库根 `AGENTS.md`。
+
+**个人全局生效**：同内容复制到用户级指令文件，如 `~/.zcode/AGENTS.md`（ZCode）、`~/.claude/CLAUDE.md`（Claude Code）。
 
 目标位置已有 AGENTS.md 时追加合并，不要覆盖。模板头部标注协议版本——升级已装模板＝用最新 `skills/nextstep/assets/` 模板覆盖对应区段（合并原则不变）。
 
-也可以装成技能，让技能代劳安装：
+**装成技能**（一次性的安装/升级助手，自带双语模板）：
 
 ```bash
 npx skills add Xjm-newgiter/nextstep@nextstep --global
 ```
 
-ZCode 插件方式：Create → Add marketplace → 填 `https://github.com/Xjm-newgiter/nextstep`，然后安装 `nextstep`。Claude Code：`/plugin marketplace add Xjm-newgiter/nextstep` 后 `/plugin install nextstep@nextstep`。
+**装成插件**：ZCode 里 Create → Add marketplace → 填 `https://github.com/Xjm-newgiter/nextstep`，然后安装 `nextstep`；Claude Code 里 `/plugin marketplace add Xjm-newgiter/nextstep` 后 `/plugin install nextstep@nextstep`。
 
 > Gitee 镜像：gitee.com/xujingmeng/nextstep。上面 skills 命令的简写形式指向 GitHub，Gitee 用户请克隆后手动复制模板。
 
@@ -63,6 +67,9 @@ ZCode 插件方式：Create → Add marketplace → 填 `https://github.com/Xjm-
 **和 skill、subagent 什么关系？**
 都不是。Skill 是按需加载的操作手册，subagent 是派出去干活的分身，NextStep 是每次会话自动生效的推进规矩，写在 `AGENTS.md` 里。三者互不冲突，可以同时用。
 
+**和内置任务工具（TodoWrite、计划模式、斜杠命令）什么关系？**
+那些工具在单个回合内、且模型主动使用时才承载执行状态。NextStep 加的是一份**收口契约**：每次收口、无论什么宿主，状态栏和编号下一步都照发；外加持久的能力登记表和静默纪律。它与原生工具叠加共存——原生工具可以承载执行清单，脚手架照常输出（裁定见 [docs/open-questions.md](docs/open-questions.md) #7）。
+
 **会不会把对话搞得很啰嗦？**
 协议自带防噪：只在收口、闸口、分叉处出菜单；文件本身 ≤40 行；说「安静」就进入静默模式，只干活不递菜单。
 
@@ -70,7 +77,10 @@ ZCode 插件方式：Create → Add marketplace → 填 `https://github.com/Xjm-
 就登记在 AGENTS.md 的「能力菜单」表里，一行一个：编号、你说什么、我做什么、详情指针。登记行数使全文将越 40 行红线时，外置成登记文件，AGENTS.md 里只留分组行和指针。
 
 **哪些情况安装技能不会运行？**
-按设计，只有安装/管理协议的请求会唤醒它。以下情况不运行：协议已装好（日常「菜单」、回数字走 AGENTS.md，不经技能）；会话早于安装启动；同名技能在更高优先级路径遮蔽（`~/.zcode/skills` > `~/.agents/skills` > 项目级 > 插件）；客户端设置里被禁用；请求内容与描述不匹配（如修 bug、写代码）；frontmatter 解析错误。技能不运行 ≠ 协议不生效。
+按设计，只有安装/升级协议的请求会唤醒它。以下情况不运行：协议已装好（日常「菜单」、回数字走 AGENTS.md，不经技能）；会话早于安装启动；同名技能在更高优先级路径遮蔽（`~/.zcode/skills` > `~/.agents/skills` > 项目级 > 插件）；客户端设置里被禁用；请求内容与描述不匹配（如修 bug、写代码）；frontmatter 解析错误。技能不运行 ≠ 协议不生效。
+
+**协议正文有英文版吗？**
+暂无——完整正文（会话推进协议.md）目前只有中文。两份 AGENTS.md 模板各自语言自包含，只影响参考阅读。跟踪于 [docs/open-questions.md](docs/open-questions.md)。
 
 ## License
 

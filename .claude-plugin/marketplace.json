@@ -1,15 +1,17 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
   "name": "nextstep",
+  "description": "NextStep conversation protocol: numbered wrap-up scaffold and a numbered capability menu, resident in AGENTS.md (会话推进协议).",
   "owner": {
     "name": "Xjm-newgiter"
   },
   "plugins": [
     {
       "name": "nextstep",
-      "description": "NextStep conversation protocol: turn scaffolding with numbered next steps and a numbered capability menu, resident in AGENTS.md (会话推进协议).",
+      "description": "Resident AGENTS.md protocol: status bar + numbered next steps at every wrap-up; capabilities invoked by number.",
       "version": "1.0.0",
-      "source": "./"
+      "source": "./",
+      "category": "productivity"
     }
   ]
 }
