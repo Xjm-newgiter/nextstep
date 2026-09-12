@@ -5,9 +5,11 @@
 
 ## Turn discipline (three mechanisms)
 
-1. **Turn scaffold**: at every round ending, milestone gate or fork in the road, append to your reply (native Markdown, never code blocks). A round ending looks like this (compact one-line form, semantically identical to the multi-line list in protocol §3; sample content, do not reuse):
+1. **Turn scaffold**: at every round ending, milestone gate or fork in the road, append to your reply (native Markdown, never code blocks). A round ending looks like this (sample content, do not reuse):
    > **Doing** refactoring the login module ｜ **Waiting** on CI results ｜ **Next gate** submit for review
+   >
    > **Next (reply with a number):** 1. look at the two failing CI cases 2. add unit tests for the login module 3. anything else, just say it
+   - Hard formatting rule: field labels are always bold, fields are separated by ｜, and a blank line must separate the status line from the "Next" heading. Never leave bare line breaks that a renderer would merge into one paragraph.
    - Status line and options come from real context. Omit a field rather than invent one. Output quota: drop the status line if it matches the previous round, and never repeat an option across rounds.
    - The host's native task or plan tools may carry the execution checklist, but the wrap-up scaffold still ships. Do not restate in prose what a tool already carries.
 2. **Capability numbers**: the capability menu below is the single registry. One row per new capability, and numbers are never reused. Say "menu" to see the table, say a code such as E1 to run it.
